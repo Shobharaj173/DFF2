@@ -1,0 +1,43 @@
+Design Module
+module dFlip(d,clk,q,qb);
+input d,clk;
+output q,qb;
+reg q,qb;
+always @(posedge clk)
+begin
+ q = d;
+ qb = ~q;
+end
+endmodule
+
+
+
+
+
+Test Bench
+module dflip_tb;
+// Inputs
+reg d;
+reg clk;
+// Outputs
+wire q;
+wire qb;
+// Instantiate the Unit Under Test (UUT)
+dFlip uut (.d(d), .clk(clk), .q(q), .qb(qb));
+ 
+initial 
+begin
+// Initialize Inputs
+$monitor ("d=%b then q=%b,qb=%b",d,q,qb);
+d = 0;
+clk = 0;
+end
+always #10 clk = ~clk;
+Department of Electronics & Communication Engineering
+VLSI Lab – 18ECL77 VVIET, Mysuru
+initial begin
+#10 d = 1;
+#20 d = 0;
+#40 d = 1;
+end
+endmodule
